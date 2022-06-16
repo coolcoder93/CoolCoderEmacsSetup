@@ -1,4 +1,4 @@
-;;; init.el --- A lightweight emacs init file for coding
+;;; init.el --- A lightweight emacs init file for coders
 
 ;; Author: CoolCoder93
 ;; Homepage: https://github.com/coolcoder93/CoolCoderEmacsSetup
