@@ -1,6 +1,5 @@
 ;; setq declarations
-(setq inhibit-startup-message t
-      visible-bell nil)
+(setq inhibit-startup-message t)
 
 (when (fboundp 'windmove-default-keybindings)
   (windmove-default-keybindings))
@@ -18,10 +17,12 @@
 
 (global-display-line-numbers-mode 1)
 
-;; Activate MELPA repositories
-(require 'package)
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
-
 ;; Add custom themes
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
-(load-theme 'dracula t)
+
+;; Create custom.el
+(setq custom-file "~/.emacs.d/custom.el")
+(load custom-file)
+
+;; Make ESC quit prompts
+(global-set-key (kbd "<escape>") 'keyboard-escape-quit)
