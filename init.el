@@ -28,10 +28,6 @@
 ;; * Add code completion
 ;; * Add NerdTree like functionality
 ;; * Add installation instructions
-;;
-;; Prerequisites:
-;; * Solargraph (for ruby support)
-;; *
 ;; 
 ;; Installation:
 ;; * 
