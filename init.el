@@ -19,7 +19,7 @@
 ;; Features (planned to be) offered:
 ;; * ivy and counsel enabled by default
 ;; * Clean interface
-;; *
+;; * Major language support
 ;;
 ;; TODO:
 ;; * Clean up code
@@ -29,6 +29,10 @@
 ;; * Add NerdTree like functionality
 ;; * Add installation instructions
 ;;
+;; Prerequisites:
+;; * Solargraph (for ruby support)
+;; *
+;; 
 ;; Installation:
 ;; * 
 
