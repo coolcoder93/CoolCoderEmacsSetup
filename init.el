@@ -1,8 +1,8 @@
-;;; init.el --- A lightweight emacs init file for coders
+;;; init.el --- A lightweight emacs config for coders
 
 ;; Author: CoolCoder93
 ;; Homepage: https://github.com/coolcoder93/CoolCoderEmacsSetup
-;; Keywords: emacs-setup
+;; Keywords: emacs-config
 ;; Version: 0.1 - alpha
 ;; Package-Requires: ((emacs "28.1"))
 
@@ -12,88 +12,59 @@
 ;; developers and people who code
 ;;
 ;; This is still in very early stages
-;; of development and I'm still leraning
+;; of development and I'm still learning
 ;; about emacs so I don't recommend using
-;; this config. Please leave feedback.
+;; this config. 
 ;;
 ;; Features (planned to be) offered:
 ;; * ivy and counsel enabled by default
 ;; * Clean interface
-;; * Major language support
+;; * lsp-mode enabled
+;; * Support for major languages
 ;;
 ;; TODO:
 ;; * Clean up code
 ;; * Organize code
-;; * Add a mode bar
-;; * Add code completion
+;; * Add code completion - almost done
 ;; * Add NerdTree like functionality
 ;; * Add installation instructions
-;; 
+;; * Use org 
+;;
 ;; Installation:
 ;; * 
 
 ;;; code:
 
 ;; setq declarations
-(setq inhibit-startup-message t)
-
-;;(setq mode-line-format
-;;          (list
-;;           "%m: "
-;;           "buffer: %b, "
-;;           "(%l,%c)"
-;;           "-- user: "
-;;           (getenv "USER")
-;;	   "%s"))
+(setq inhibit-startup-message 1)
 
 
 
-(setq mode-line-format
-  (list "-"
-   'mode-line-mule-info
-   'mode-line-modified
-   'mode-line-frame-identification
-   "%b--"
-   (getenv "HOST")
-   ":"
-   'default-directory
-   "   "
-   'global-mode-string
-   "   %[("
-   '(:eval (format-time-string "%F"))
-   'mode-line-process
-   'minor-mode-alist
-   "%n"
-   ")%]--"
-   '(which-function-mode ("" which-func-format "--"))
-   '(line-number-mode "L%l--")
-   '(column-number-mode "C%c--")
-   '(-3 "%p")))
-
+;; (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
 
 (when (fboundp 'windmove-default-keybindings)
   (windmove-default-keybindings))
-
-;; Enable the emacs server
-(server-start)
 
 ;; Use M-x recentf-open-files
 (recentf-mode 1)
 
 ;; Disable modes
 (scroll-bar-mode -1)
-(tool-bar-mode -1)
+(tool-bar-mode -1) 
 ;; TODO: (menu-bar-mode -1)
 
 (global-display-line-numbers-mode 1)
 
-;; Add custom themes
-(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
-(counsel-load-theme)
-
 ;; Create custom.el
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file)
+
+(dolist (mode '(org-mode-hook
+                term-mode-hook
+                shell-mode-hook
+                treemacs-mode-hook
+                eshell-mode-hook))
+  (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
 ;; Make ESC quit prompts
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
@@ -102,9 +73,9 @@
 (require 'package)
 
 (setq package-archives '(("melpa" . "https://melpa.org/packages/")
-			 ("melpa-stable" . "https://stable.melpa.org/packages/")
-			 ("org" . "https://orgmode.org/elpa")
-			 ("elpa" . "https://elpa.gnu.org/packages")))
+                         ("org" . "https://orgmode.org/elpa/")
+                         ("elpa" . "https://elpa.gnu.org/packages/")))
+			 
 (package-initialize)
 (unless package-archive-contents
   (package-refresh-contents))
@@ -142,6 +113,24 @@
   :config
   (counsel-mode 1))
 
+;; On first install run M-x all-the-icons-install-fonts
+(use-package all-the-icons)
 
+(use-package doom-themes
+  :init (load-theme 'doom-dracula t))
+
+(use-package doom-modeline
+  :ensure t
+  :init (doom-modeline-mode 1))
+
+(use-package lsp-mode
+  :commands (lsp lsp-deferred)
+  :init
+  (setq lsp-keymap-prefix "C-c l")
+  :config
+  (lsp-enable-which-key-integration t))
+
+(require 'lsp-java)
+(add-hook 'java-mode-hook #'lsp)
 
 ;;; init.el ends here
