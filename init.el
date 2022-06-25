@@ -130,7 +130,8 @@
   :config
   (lsp-enable-which-key-integration t))
 
-(require 'lsp-java)
-(add-hook 'java-mode-hook #'lsp)
+;; Run M-x package-install RET lsp-java RET for java suppot and uncomment the two following lines
+;;(require 'lsp-java)
+;;(add-hook 'java-mode-hook #'lsp)
 
 ;;; init.el ends here
