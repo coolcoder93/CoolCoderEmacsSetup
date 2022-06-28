@@ -127,8 +127,8 @@
   :commands (lsp lsp-deferred)
   :init
   (setq lsp-keymap-prefix "C-c l")
-  :config
-  (lsp-enable-which-key-integration t))
+  ;;:config
+  ;;(lsp-enable-which-key-integration t))
 
 ;; Run M-x package-install RET lsp-java RET for java suppot and uncomment the two following lines
 ;;(require 'lsp-java)
