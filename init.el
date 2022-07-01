@@ -1,37 +1,37 @@
-;;; init.el --- A lightweight emacs config for coders
+;;; init.el --- Emacs config for coders
 
 ;; Author: CoolCoder93
 ;; Homepage: https://github.com/coolcoder93/CoolCoderEmacsSetup
 ;; Keywords: emacs-config
-;; Version: 0.1 - alpha
+;; Version: 0.2 - alpha
 ;; Package-Requires: ((emacs "28.1"))
 
 ;;; Commentary:
 ;;
-;; This is a simple emacs config focused on
+;; This is a simple Emacs config focused on
 ;; developers and people who code
 ;;
 ;; This is still in very early stages
 ;; of development and I'm still learning
-;; about emacs so I don't recommend using
-;; this config. 
+;; about Emacs so I don't recommend using
+;; this config (yet).
 ;;
 ;; Features (planned to be) offered:
 ;; * ivy and counsel enabled by default
 ;; * Clean interface
 ;; * lsp-mode enabled
-;; * Support for major languages
+;; * Code completion
+;; * Integrated shell(terminal)
 ;;
 ;; TODO:
 ;; * Clean up code
 ;; * Organize code
-;; * Add code completion - almost done
 ;; * Add NerdTree like functionality
 ;; * Add installation instructions
-;; * Use org 
+;; * Use org
 ;;
 ;; Installation:
-;; * 
+;; *
 
 ;;; code:
 
@@ -50,7 +50,7 @@
 
 ;; Disable modes
 (scroll-bar-mode -1)
-(tool-bar-mode -1) 
+(tool-bar-mode -1)
 ;; TODO: (menu-bar-mode -1)
 
 (global-display-line-numbers-mode 1)
@@ -59,6 +59,7 @@
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file)
 
+;; Disable the line numbers for certain file types
 (dolist (mode '(org-mode-hook
                 term-mode-hook
                 shell-mode-hook
@@ -123,15 +124,32 @@
   :ensure t
   :init (doom-modeline-mode 1))
 
+;; Run M-x package-install RET which-key and the uncomment the two following lines and the two lines in the lsp mode use-package config
+;;(require 'which-key)
+;;(which-key-mode)
+
 (use-package lsp-mode
   :commands (lsp lsp-deferred)
   :init
   (setq lsp-keymap-prefix "C-c l")
   ;;:config
-  ;;(lsp-enable-which-key-integration t))
+  ;;(lsp-enable-which-key-integration t)
+  )
 
 ;; Run M-x package-install RET lsp-java RET for java suppot and uncomment the two following lines
 ;;(require 'lsp-java)
 ;;(add-hook 'java-mode-hook #'lsp)
+
+;; C/C++ hooks
+(add-hook 'c-mode-hook 'lsp)
+(add-hook 'c++-mode-hook 'lsp)
+
+;; For code completion run M-x package-install RET company RET
+;; enable company-mode by uncomenting the following line
+;;(add-hook 'after-init-hook 'global-company-mode)
+
+(use-package flycheck
+  :ensure t
+  :init (global-flycheck-mode))
 
 ;;; init.el ends here
