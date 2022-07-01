@@ -118,7 +118,10 @@
 (use-package all-the-icons)
 
 (use-package doom-themes
-  :init (load-theme 'doom-dracula t))
+  :init (load-theme 'doom-city-lights t)
+  :config
+  (setq doom-themes-enable-bold t
+	doom-themes-enable-italic t))
 
 (use-package doom-modeline
   :ensure t
