@@ -118,7 +118,7 @@
 (use-package all-the-icons)
 
 (use-package doom-themes
-  :init (load-theme 'doom-city-lights t)
+  :init (load-theme 'doom-monokai-classic t)
   :config
   (setq doom-themes-enable-bold t
 	doom-themes-enable-italic t))
