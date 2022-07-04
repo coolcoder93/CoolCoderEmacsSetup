@@ -38,7 +38,8 @@
 ;; setq declarations
 (setq inhibit-startup-message 1)
 
-
+;; Use shift to move between windows
+(windmove-default-keybindings 'meta)
 
 ;; (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
 
