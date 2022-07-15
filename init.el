@@ -119,7 +119,7 @@
 (use-package all-the-icons)
 
 (use-package doom-themes
-  :init (load-theme 'doom-monokai-classic t)
+  :init (load-theme 'doom-gruvbox t)
   :config
   (setq doom-themes-enable-bold t
 	doom-themes-enable-italic t))
