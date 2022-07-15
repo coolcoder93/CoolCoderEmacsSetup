@@ -152,6 +152,7 @@
 
 (unless (package-installed-p 'company)
   (package-install 'company))
+(require company)
 (add-hook 'after-init-hook 'global-company-mode)
 
 (use-package flycheck
