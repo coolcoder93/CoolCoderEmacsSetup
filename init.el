@@ -128,9 +128,10 @@
   :ensure t
   :init (doom-modeline-mode 1))
 
-;; Run M-x package-install RET which-key and the uncomment the two following lines and the two lines in the lsp mode use-package config
-;;(require 'which-key)
-;;(which-key-mode)
+(unless (package-installed-p 'which-key)
+  (package-install 'which-key))
+(require 'which-key)
+(which-key-mode)
 
 (use-package lsp-mode
   :commands (lsp lsp-deferred)
@@ -140,17 +141,18 @@
   ;;(lsp-enable-which-key-integration t)
   )
 
-;; Run M-x package-install RET lsp-java RET for java suppot and uncomment the two following lines
-;;(require 'lsp-java)
-;;(add-hook 'java-mode-hook #'lsp)
+(unless (package-installed-p 'lsp-java)
+  (package-install 'lsp-java))
+(require 'lsp-java)
+(add-hook 'java-mode-hook #'lsp)
 
 ;; C/C++ hooks
 (add-hook 'c-mode-hook 'lsp)
 (add-hook 'c++-mode-hook 'lsp)
 
-;; For code completion run M-x package-install RET company RET
-;; enable company-mode by uncomenting the following line
-;;(add-hook 'after-init-hook 'global-company-mode)
+(unless (package-installed-p 'company)
+  (package-install 'company))
+(add-hook 'after-init-hook 'global-company-mode)
 
 (use-package flycheck
   :ensure t
