@@ -159,4 +159,28 @@
   :ensure t
   :init (global-flycheck-mode))
 
+(use-package treemacs
+  :ensure t
+  :defer t
+  :config
+  (progn
+    (setq treemacs-display-in-side-window t
+	  treemacs-follow-after-init t
+          treemacs-expand-after-init t
+	  treemacs-position 'left
+	  treemacs-show-hidden-files t))
+    :bind
+  (:map global-map
+        ("M-0"       . treemacs-select-window)
+        ("C-x t 1"   . treemacs-delete-other-windows)
+        ("C-x t t"   . treemacs)
+        ("C-x t d"   . treemacs-select-directory)
+        ("C-x t B"   . treemacs-bookmark)
+        ("C-x t C-t" . treemacs-find-file)
+        ("C-x t M-t" . treemacs-find-tag)))
+
+(use-package treemacs-icons-dired
+  :hook (dired-mode . treemacs-icons-dired-enable-once)
+  :ensure t)
+
 ;;; init.el ends here
